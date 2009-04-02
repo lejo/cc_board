@@ -14,16 +14,17 @@
         Text Size: <input id="text_size_input" type="text" size="5" onchange="changeTextSize(this.value)"/>%
       </form>
     </div>
-    <% @build_lists.each do |list| %>
-      <% list.each do |build| %>
-        <div class="build <%= build.status %> <%= build.activity %>">
-          <a href="<%= build.url || '#' %>" 
-             onclick="<%= "alert('No URL Available'); return false" unless build.url %>"
-             target="_blank">
-             <%= build.name %>
-          </a>
-        </div>
-      <% end %>
-    <% end %>
+  <% builds = [] %>
+  <% @build_lists.each { |list| list.each { |b| builds << b } } %>
+
+  <% builds.sort_by(&:status).each do |build| %>
+    <div class="build <%= build.status %> <%= build.activity %>">
+      <a href="<%= build.url || '#' %>"
+         onclick="<%= "alert('No URL Available'); return false" unless build.url %>"
+         target="_blank">
+         <%= build.name %>
+      </a>
+    </div>
+  <% end %>
   </body>
 </html>
