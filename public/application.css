@@ -68,6 +68,17 @@ a {
   color: black;
 }
 
-div.success {
-	line-height: 50%;
+div.failure {
+ line-height: 130%;
 }
+
+div.success.sleeping, div.success.checkingmodifications {
+  background: none;
+  border: thin solid #CFC;
+  font-size: .8em;
+}
+
+div.success.sleeping a, div.success.checkingmodifications a {
+  color: #888;
+}
+

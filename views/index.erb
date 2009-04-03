@@ -14,10 +14,8 @@
         Text Size: <input id="text_size_input" type="text" size="5" onchange="changeTextSize(this.value)"/>%
       </form>
     </div>
-  <% builds = [] %>
-  <% @build_lists.each { |list| list.each { |b| builds << b } } %>
 
-  <% builds.sort_by(&:status).each do |build| %>
+  <% @builds.each do |build| %>
     <div class="build <%= build.status %> <%= build.activity %>">
       <a href="<%= build.url || '#' %>"
          onclick="<%= "alert('No URL Available'); return false" unless build.url %>"

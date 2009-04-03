@@ -26,10 +26,22 @@ helpers do
       BuildList.new filename
     end
   end
+
+  def builds
+    all_builds = []
+    build_lists.each do |list|
+      list.each {|b| all_builds << b}
+    end
+    all_builds.sort_by(&:status)
+    failing, success = all_builds.partition{|b| b.status == "failure" }
+    success_building, success_sleeping = success.partition {|b| b.activity == "building"  }
+    (failing + success_building + success_sleeping)
+  end
+
 end
 
 get "/" do
-  @build_lists = build_lists
+  @builds = builds
   erb :index
 end
 
